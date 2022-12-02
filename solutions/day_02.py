@@ -1,54 +1,20 @@
 with open('inputs/day_02.txt') as input_file:
     rounds = input_file.readlines()
 
-scores = {"X": 1, "Y": 2, "Z": 3, "loss": 0, "draw": 3, "win": 6}
+# part 1
+score_map = {"A X": 4, "A Y": 8, "A Z": 3, "B X": 1, "B Y": 5, "B Z": 9, "C X": 7, "C Y": 2, "C Z": 6}
 total_score = 0
 
 for round in rounds:
-    opponent = round[0]
-    my_play = round[2]
-    if my_play == "X": # rock
-        total_score += scores["X"]
-        if opponent == "A": # rock
-            total_score += scores["draw"]
-        if opponent == "B": # paper
-            total_score += scores["loss"]
-        if opponent == "C": # scissors
-            total_score += scores["win"]
-    if my_play == "Y": # paper
-        total_score += scores["Y"]
-        if opponent == "A": # rock
-            total_score += scores["win"]
-        if opponent == "B": # paper
-            total_score += scores["draw"]
-        if opponent == "C": # scissors
-            total_score += scores["loss"]
-    if my_play == "Z": # scissors
-        total_score += scores["Z"]
-        if opponent == "A": # rock
-            total_score += scores["loss"]
-        if opponent == "B": # paper
-            total_score += scores["win"]
-        if opponent == "C": # scissors
-            total_score += scores["draw"]
+    total_score += score_map.get(round.strip())
 
 print(f"Part 1 total score: {total_score}")
 
 # part 2
-loss_map = {"A": 3, "B": 1, "C": 2}
-draw_map = {"A": 4, "B": 5, "C": 6}
-win_map = {"A": 8, "B": 9, "C": 7}
+score_map = {"A X": 3, "A Y": 4, "A Z": 8, "B X": 1, "B Y": 5, "B Z": 9, "C X": 2, "C Y": 6, "C Z": 7}
 
 total_score = 0
 for round in rounds:
-    opponent = round[0]
-    result = round[2]
-
-    if result == "X": # loss
-        total_score += loss_map[opponent]
-    if result == "Y": # draw
-        total_score += draw_map[opponent]
-    if result == "Z": # win
-        total_score += win_map[opponent]
+    total_score += score_map.get(round.strip())
 
 print(f"Part 2 total score: {total_score}")
